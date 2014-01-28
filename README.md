@@ -7,6 +7,11 @@ go get github.com/boboman13/UpImg
 cd $GOPATH/UpImg/src/main
 
 go build
+```
+
+### Software Usage
+Make sure that the `main` file is located in the root directory of the UpImg install (~/UpImg/). Running `ls` should show the `static` and `src` directories.
+```bash
 ./main
 ```
 
