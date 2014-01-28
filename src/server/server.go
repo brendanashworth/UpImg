@@ -9,7 +9,7 @@ import (
 // The index page. This also handles 
 func IndexHandler(writer http.ResponseWriter, request *http.Request) {
 	// Load the /static/index.html template page.
-	content, err := ioutil.ReadFile("/static/index.html")
+	content, err := ioutil.ReadFile("static/index.html")
 	if err != nil {
 		fmt.Println("Error occurred while loading static/index.html: " + err.Error())
 		return
