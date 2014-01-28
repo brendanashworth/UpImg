@@ -10,12 +10,12 @@ type UpImgServer struct {
 }
 
 // The index page. This also handles 
-func IndexHandler(writer http.ResponseWriter, *Request http.Request) {
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(writer, "<html><head><title>UpImg</title></head><body><h1>UPIMG UPLOAD UR FILEZ</body></html>")
 }
 
 // The upload page.
-func UploadHandler(writer http.ResponseWriter, *Request http.Request) {
+func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(writer, "<html><head><title>uploadz</title></head><body>dez uploads</body></html>")
 }
 
