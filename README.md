@@ -4,6 +4,7 @@
 ### Compilation
 ```bash
 go get github.com/boboman13/UpImg
+cd $GOPATH/UpImg/src/main
 
 go build
 ./main
