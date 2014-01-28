@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt",
+	"fmt"
 	"github.com/boboman13/UpImg/server"
 )
 
@@ -12,5 +12,4 @@ func main() {
 	output := server.Start(":80")
 
 	fmt.Println(output)
-
 }

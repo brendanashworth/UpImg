@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt",
+	"fmt"
 	"net/http"
 )
 
@@ -26,4 +26,6 @@ func (*UpImgServer) Start(port string) (output string) {
 
 	// Listen and serve.
 	http.ListenAndServe(port, nil)
+
+	return "Started UpImg on port "+port
 }
