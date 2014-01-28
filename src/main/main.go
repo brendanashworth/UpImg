@@ -6,9 +6,8 @@ import (
 )
 
 func main() {
+	fmt.Println("Starting UpImg server on :8080")
 	
 	// Create the server and start it.
-	output := server.Start(":8080")
-
-	fmt.Println(output)
+	server.Start(":8080")
 }

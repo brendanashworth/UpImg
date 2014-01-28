@@ -24,12 +24,10 @@ func UploadHandler(writer http.ResponseWriter, request *http.Request) {
 }
 
 // Starts the UpImgServer.
-func Start(port string) (output string) {
+func Start(port string) {
 	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/upload", UploadHandler)
 
 	// Listen and serve.
 	http.ListenAndServe(port, nil)
-
-	return "Started UpImg on port "+port
 }
