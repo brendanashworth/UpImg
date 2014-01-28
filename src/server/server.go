@@ -3,16 +3,24 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"io/ioutil"
 )
 
 // The index page. This also handles 
 func IndexHandler(writer http.ResponseWriter, request *http.Request) {
-	fmt.Fprintf(writer, "<html><head><title>UpImg</title></head><body><h1>UPIMG UPLOAD UR FILEZ</body></html>")
+	// Load the /static/index.html template page.
+	content, err := ioutil.ReadFile("/static/index.html")
+	if err != nil {
+		fmt.Fatal("Error occurred while loading static/index.html: " + err)
+		return
+	}
+
+	writer.Write(content)
 }
 
 // The upload page.
 func UploadHandler(writer http.ResponseWriter, request *http.Request) {
-	fmt.Fprintf(writer, "<html><head><title>uploadz</title></head><body>dez uploads</body></html>")
+	fmt.Fprintf(writer, "<html><head><title>Upload Page</title></head><body>Dat Upload Page</body></html>")
 }
 
 // Starts the UpImgServer.
