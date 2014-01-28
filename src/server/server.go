@@ -5,10 +5,6 @@ import (
 	"net/http"
 )
 
-type UpImgServer struct {
-	
-}
-
 // The index page. This also handles 
 func IndexHandler(writer http.ResponseWriter, request *http.Request) {
 	fmt.Fprintf(writer, "<html><head><title>UpImg</title></head><body><h1>UPIMG UPLOAD UR FILEZ</body></html>")
@@ -20,7 +16,7 @@ func UploadHandler(writer http.ResponseWriter, request *http.Request) {
 }
 
 // Starts the UpImgServer.
-func (*UpImgServer) Start(port string) (output string) {
+func Start(port string) (output string) {
 	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/upload", UploadHandler)
 
