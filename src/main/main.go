@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/boboman13/UpImg/server"
+	"server"
 )
 
 func main() {
