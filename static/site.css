@@ -10,3 +10,12 @@
 
 	font-family: "Open Sans", Helvetica, arial, sans-serif;
 }
+
+input[type=submit] {
+	background: #6BE400;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+
+	padding: 8px;
+	font-size: 13px;
+}
