@@ -11,7 +11,7 @@ func IndexHandler(writer http.ResponseWriter, request *http.Request) {
 	// Load the /static/index.html template page.
 	content, err := ioutil.ReadFile("/static/index.html")
 	if err != nil {
-		fmt.Fatal("Error occurred while loading static/index.html: " + err.Error())
+		fmt.Println("Error occurred while loading static/index.html: " + err.Error())
 		return
 	}
 
