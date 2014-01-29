@@ -1,6 +1,8 @@
 # UpImg
 > UpImg is an open source image-upload tool, based in the language of Go. Images are stored in a MySQL database and encoded/decoded via Base64.
 
+[![Build Status](https://travis-ci.org/boboman13/UpImg.png?branch=master)](https://travis-ci.org/boboman13/UpImg)
+
 ### Compilation
 This includes the Go MySQL driver necessary.
 ```bash
