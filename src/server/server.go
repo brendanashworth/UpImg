@@ -4,10 +4,39 @@ import (
 	"fmt"
 	"net/http"
 	"io/ioutil"
+	"backend"
 )
+
+type UpImgServer struct {
+	port string
+	*db Database
+}
+
+func NewServer(port string, *db Database) (*server UpImgServer) {
+	*temp := &UpImgServer{
+		port: port
+		db: *db
+	}
+
+	return *temp
+}
+
+// Starts the UpImgServer.
+func (*server UpImgServer) Start(port string) {
+	http.HandleFunc("/", IndexHandler)
+	http.HandleFunc("/upload", UploadHandler)
+	http.HandleFunc("/site.css", StyleHandler)
+
+	// Listen and serve.
+	http.ListenAndServe(port, nil)
+}
 
 // The index page. This also handles 
 func IndexHandler(writer http.ResponseWriter, request *http.Request) {
+	if(len(*request.url.Path) > 0) {
+		
+	}
+
 	// Load the /static/index.html template page.
 	content, err := ioutil.ReadFile("static/index.html")
 	if err != nil {
@@ -32,14 +61,4 @@ func StyleHandler(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	writer.Write(content)
-}
-
-// Starts the UpImgServer.
-func Start(port string) {
-	http.HandleFunc("/", IndexHandler)
-	http.HandleFunc("/upload", UploadHandler)
-	http.HandleFunc("/site.css", StyleHandler)
-
-	// Listen and serve.
-	http.ListenAndServe(port, nil)
 }
