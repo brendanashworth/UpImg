@@ -9,7 +9,7 @@ import (
 
 type UpImgServer struct {
 	port string
-	*db Database
+	db *Database
 }
 
 func NewServer(port string, *db Database) (*server UpImgServer) {
@@ -23,7 +23,7 @@ func NewServer(port string, *db Database) (*server UpImgServer) {
 
 // Starts the UpImgServer.
 func (*server UpImgServer) Start(port string) {
-	http.HandleFunc("/", IndexHandler)
+	http.HandleFunc("/", *server.IndexHandler)
 	http.HandleFunc("/upload", UploadHandler)
 	http.HandleFunc("/site.css", StyleHandler)
 
@@ -32,9 +32,12 @@ func (*server UpImgServer) Start(port string) {
 }
 
 // The index page. This also handles 
-func IndexHandler(writer http.ResponseWriter, request *http.Request) {
+func (server *UpImgServer) IndexHandler(writer http.ResponseWriter, request *http.Request) {
 	if(len(*request.url.Path) > 0) {
-		
+		img := backend.GetImage(*request.url.Path)
+		writer.Write(img)
+
+		return
 	}
 
 	// Load the /static/index.html template page.

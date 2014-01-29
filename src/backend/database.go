@@ -3,16 +3,17 @@ package backend
 import (
 	"fmt"
 	"database/sql"
-	_ "github.com/Go-SQL-Driver/MySQL"
+	"github.com/go-sql-driver/mysql"
 )
 
 type Database struct {
-	*connection DB
+	connection *mysql.MySQLDriver
 }
 
 // Connects to the database.
-func ConnectDatabase(host string, database string, user string, password string) (*database Database) {
+func ConnectDatabase(host string, database string, user string, password string) (db *Database) {
 	dsn := user + ":" + password + "@tcp(" + host + ":3306)/" + database + "?charset=utf8"
+	// username:password@tcp(example.com:3306)/database?charset=utf8
 
 	// Connect to the database!
 	db, err := sql.Open("mysql", dsn)
@@ -22,7 +23,7 @@ func ConnectDatabase(host string, database string, user string, password string)
 	}
 
 	// Pings the database for connection.
-	err := db.Ping()
+	err = db.Ping()
 	if err != nil {
 		fmt.Println(err.Error())
 		return nil
@@ -31,24 +32,20 @@ func ConnectDatabase(host string, database string, user string, password string)
 	}
 
 	// Return the database, then don't do much.
-	return Database{
-		*connection: &db
-	}
-
+	db = &Database{ connection: &db }
+	return *db
 }
 
-func (*db Database) GetImage(url string) (img []byte) {
-	var img string
-
+func (db *Database) GetImage(url string) (img string) {
 	err := *db.connection.QueryRow("SELECT image FROM `images` WHERE `url`='?' LIMIT 1", url).Scan(&img)
 
 	if err != nil {
-		return nil
+		return ""
 	} else {
 		return img
 	}
 }
 
-func (*db Database) Close() {
-	*db.db.Close()
+func (db *Database) Close() {
+	*db.connection.Close()
 }
