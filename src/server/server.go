@@ -5,24 +5,25 @@ import (
 	"net/http"
 	"io/ioutil"
 	"backend"
+	"database/sql"
 )
 
 type UpImgServer struct {
 	port string
-	db *Database
+	db *sql.DB
 }
 
-func NewServer(port string, *db Database) (*server UpImgServer) {
-	*temp := &UpImgServer{
-		port: port
-		db: *db
+func NewServer(port string, db *sql.DB) (server *UpImgServer) {
+	*server = &UpImgServer{
+		port: port,
+		db: *db,
 	}
 
-	return *temp
+	return *server
 }
 
 // Starts the UpImgServer.
-func (*server UpImgServer) Start(port string) {
+func (server *UpImgServer) Start(port string) {
 	http.HandleFunc("/", *server.IndexHandler)
 	http.HandleFunc("/upload", UploadHandler)
 	http.HandleFunc("/site.css", StyleHandler)
@@ -33,9 +34,9 @@ func (*server UpImgServer) Start(port string) {
 
 // The index page. This also handles 
 func (server *UpImgServer) IndexHandler(writer http.ResponseWriter, request *http.Request) {
-	if(len(*request.url.Path) > 0) {
-		img := backend.GetImage(*request.url.Path)
-		writer.Write(img)
+	if(len(*request.URL.Path) > 0) {
+		//img := backend.GetImage(*request.url.Path)
+		//writer.Write(img)
 
 		return
 	}
