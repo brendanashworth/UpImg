@@ -2,10 +2,24 @@ package backend
 
 import (
 	"fmt"
-	"database/sql"
 )
 
-func ConnectDatabase(user string, password string, host string, dbname string) (database *sql.DB) {
+type Backend struct {
+
+}
+
+func ConnectDatabase(user string, password string, host string, dbname string) *Backend {
+	fmt.Println("Connected to MySQL database on " + host)
+	return &Backend{
+
+	}
+}
+
+func (backend *Backend) GetImage(url string) (image []byte) {
+	return make([]byte, '2')
+}
+
+/*func ConnectDatabase(user string, password string, host string, dbname string) (database *sql.DB) {
 	dsn := user + ":" + password + "@tcp(" + host + ":3306)/" + dbname + "?charset=utf8"
 
 	// Opens the connection with the given DSN
@@ -24,4 +38,4 @@ func ConnectDatabase(user string, password string, host string, dbname string) (
 	fmt.Println("Connected to MySQL database on " + host + ".")
 
 	return db
-}
+}*/
