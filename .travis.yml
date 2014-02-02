@@ -1,5 +1,8 @@
 language: go
 
+notifications:
+    email: false
+
 go:
     - 1.1
     - tip
@@ -8,6 +11,6 @@ install:
     - go get github.com/go-sql-driver/mysql
 
 script:
-    - cd src/main
     - export GOPATH=`pwd`
+    - cd src/main
     - go build
