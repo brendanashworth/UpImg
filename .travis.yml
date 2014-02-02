@@ -9,4 +9,5 @@ install:
 
 script:
     - cd src/main
+    - export GOPATH=`pwd`
     - go build
