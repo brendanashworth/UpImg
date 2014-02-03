@@ -1,16 +1,27 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 	<head>
 		<title>UpImg &#183; Easy Image Uploads</title>
 		<link href="site.css" rel="stylesheet" />
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" />
 	</head>
 
 	<body>
 		<div class="container">
-			<form method="post" action="/upload">
-				<input name="file" type="file" />
-				<input type="submit" />
-			</form>
+			<div class="jumbotron">
+				<h1>UpImg</h1>
+				<br />
+
+				<form method="post" action="/upload">
+					<input name="file" type="file" />
+
+					<center>
+						<input class="btn btn-primary btn-lg" type="submit" />
+					</center>
+
+				</form>
+			</div>
 		</div>
 	</body>
 

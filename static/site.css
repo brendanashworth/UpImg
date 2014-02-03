@@ -1,22 +1,17 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
 
-.container {
-	max-width: 1040px;
-	border-radius: 10px;
-
-	margin: 100px auto;
-	padding: 80px;
-
-	background: #efefef;
-
+body {
 	font-family: "Open Sans", Helvetica, arial, sans-serif;
 }
 
-input[type=submit] {
-	background: #6BE400;
-	border: 1px solid #aaa;
-	border-radius: 4px;
+.jumbotron {
+	margin-top: 100px;
+}
 
-	padding: 8px;
-	font-size: 13px;
+.jumbotron > h1 {
+	text-align: center;
+}
+
+.btn-lg {
+	width: 50%;
 }
