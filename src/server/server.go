@@ -64,5 +64,6 @@ func StyleHandler(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
+	writer.Header().Set("Content-Type", "text/css")
 	writer.Write(content)
 }
