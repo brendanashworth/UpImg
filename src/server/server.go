@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"io/ioutil"
 	"backend"
+	"regexp"
 )
 
 type UpImgServer struct {
@@ -32,8 +33,29 @@ func (this *UpImgServer) Start() {
 // The index page. This also handles image requests.
 func IndexHandler(writer http.ResponseWriter, request *http.Request) {
 	// If the user asked for an image.
-	if len(request.URL.Path) == 9 {
-		fmt.Fprintf(writer, request.URL.Path[1:8])
+	if len(request.URL.Path) == 8 {
+		// make sure the url is alphanumeric
+		reg, err := regexp.Compile("[^A-Za-z0-9]+")
+		if err != nil {
+			fmt.Println("Error occurred while compiling regex: " + err.Error())
+			return
+		}
+
+		url := reg.ReplaceAllString(request.URL.Path[1:8], "")
+		img := "images/" + url + ".png"
+
+		// double check the length is still 8
+		if len(url) != 7 {
+			return
+		}
+
+		data, err := ioutil.ReadFile(img)
+		if err != nil {
+			fmt.Println("Error occurred while reading file: [" + img + "] " + err.Error())
+			return
+		}
+
+		writer.Write(data)
 		return
 	} else if len(request.URL.Path) == 1 {
 		// It was `/`, don't redirect.
@@ -53,6 +75,12 @@ func IndexHandler(writer http.ResponseWriter, request *http.Request) {
 
 // The upload page.
 func UploadHandler(writer http.ResponseWriter, request *http.Request) {
+	file, handler, err := req.FormFile("file")
+	if err != nil {
+		fmt.Println("Error uploading file: " + err.Error())
+		return
+	}
+
 	fmt.Fprintf(writer, "Upload complete.")
 }
 
