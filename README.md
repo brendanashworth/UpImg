@@ -1,20 +1,18 @@
 # UpImg
-> UpImg is an open source image-upload tool, based in the language of Go. Images are stored in a MySQL database and encoded/decoded via Base64.
+> UpImg is an open source image-upload tool, based in the language of Go. Images are currently stored in the images/ directory.
 
 [![Build Status](https://travis-ci.org/boboman13/UpImg.png?branch=master)](https://travis-ci.org/boboman13/UpImg)
 
 ### Compilation
-This includes the Go MySQL driver necessary.
 ```bash
 $ go get github.com/boboman13/UpImg
-$ go get github.com/go-sql-driver/mysql
 $ cd $GOPATH/UpImg/src/main
 
 $ go build
 ```
 
 ### Software Usage
-Make sure that the `main` file is located in the root directory of the UpImg install (~/UpImg/). Running `ls` should show the `static` and `src` directories.
+Make sure that the `main` file is located in the root directory of the UpImg install (~/UpImg/). Running `ls` should show the `static` and `src` directories. Once this is completed, `mkdir images` will create the images directory.
 ```bash
 $ ./main
 ```
