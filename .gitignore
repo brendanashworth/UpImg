@@ -1,2 +1,10 @@
+# Go utilities
 src/github.com
 pkg
+main
+
+# Compiling utilities (different per developer)
+make.sh
+
+# UpImg utilities
+images/
