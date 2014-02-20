@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"backend"
 	"regexp"
+	"math/rand"
+	"strconv"
 )
 
 type UpImgServer struct {
@@ -51,7 +53,7 @@ func IndexHandler(writer http.ResponseWriter, request *http.Request) {
 
 		data, err := ioutil.ReadFile(img)
 		if err != nil {
-			fmt.Println("Error occurred while reading file: [" + img + "] " + err.Error())
+			http.Redirect(writer, request, `/`, 302)
 			return
 		}
 
@@ -92,13 +94,16 @@ func UploadHandler(writer http.ResponseWriter, request *http.Request) {
 		fmt.Println("Error uploading file #2: " + err.Error())
 	}
 
+	name := GenerateNewURL()
+
 	// now try and save the file.
-	err = ioutil.WriteFile("images/testupl.png", data, 0777)
+	err = ioutil.WriteFile("images/" + name + ".png", data, 0777)
 	if err != nil {
 		fmt.Println("Error uploading file #3: " + err.Error())
+		http.Redirect(writer, request, `/`, 302) // redirect him to home
 	}
 
-	http.Redirect(writer, request, "/testupl", 302)
+	http.Redirect(writer, request, "/" + name, 302)
 }
 
 // The site.css file.
@@ -112,3 +117,16 @@ func StyleHandler(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Content-Type", "text/css")
 	writer.Write(content)
 }
+
+
+// utilities
+
+func GenerateNewURL() string {
+	var chars = ""
+	for i := 0; i < 7; i = i + 1 {
+		chars = chars + strconv.Itoa(rand.Intn(10))
+	}
+
+	return chars
+}
+
