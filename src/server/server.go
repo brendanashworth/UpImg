@@ -75,13 +75,30 @@ func IndexHandler(writer http.ResponseWriter, request *http.Request) {
 
 // The upload page.
 func UploadHandler(writer http.ResponseWriter, request *http.Request) {
-	file, handler, err := req.FormFile("file")
-	if err != nil {
-		fmt.Println("Error uploading file: " + err.Error())
+	// make sure it was POST
+	if request.Method != "POST" {
 		return
 	}
 
-	fmt.Fprintf(writer, "Upload complete.")
+	file, _, err := request.FormFile("file")
+	if err != nil {
+		fmt.Println("Error uploading file #1: " + err.Error())
+		return
+	}
+
+	// now that hes uploaded it, get the data
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		fmt.Println("Error uploading file #2: " + err.Error())
+	}
+
+	// now try and save the file.
+	err = ioutil.WriteFile("images/testupl.png", data, 0777)
+	if err != nil {
+		fmt.Println("Error uploading file #3: " + err.Error())
+	}
+
+	http.Redirect(writer, request, "/testupl", 302)
 }
 
 // The site.css file.
