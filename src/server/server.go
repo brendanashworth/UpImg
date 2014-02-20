@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"io/ioutil"
-	"backend"
 	"regexp"
 	"math/rand"
 	"strconv"
@@ -12,13 +11,11 @@ import (
 
 type UpImgServer struct {
 	port string
-	db *backend.Backend
 }
 
-func NewServer(port string, db *backend.Backend) *UpImgServer {
+func NewServer(port string) *UpImgServer {
 	return &UpImgServer{
 		port: port,
-		db: db,
 	}
 }
 
