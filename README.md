@@ -1,5 +1,5 @@
 # UpImg
-> UpImg is an open source image-upload tool, based in the language of Go. Images are currently stored in the images/ directory. [Here](http://boboman13.net:8080 "UpImg Example") is an example installation.
+> UpImg is an open source image-upload tool, based in the language of Go. Images are currently stored in the images/ directory.
 
 [![Build Status](https://travis-ci.org/boboman13/UpImg.png?branch=master)](https://travis-ci.org/boboman13/UpImg)
 
